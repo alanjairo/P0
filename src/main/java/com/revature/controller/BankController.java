@@ -52,6 +52,7 @@ public class BankController {
                     break;
                 case "5":
                     //close an account
+                    closeAccount(bankAccount(user));
                     break;
                 case "q":
                     System.out.println("Logging Out!");
@@ -184,8 +185,15 @@ public class BankController {
         return false;
     }
 
-    //public void closeAccount(List<Bank> accounts, int accountId)
-    //{
+    public void closeAccount(List<Bank> accounts)
+    {
+        int accountId;
+        System.out.print("Which account would you like to close: ");
+        accountId = scan.nextInt();
 
-    //}
+        if(searchAccount(accounts,accountId))
+        {
+            bServe.close(accounts,accountId);
+        }
+    }
 }

@@ -88,4 +88,22 @@ public class BankService {
         }
     }
 
+    public void close(List<Bank> accounts, int accountId)
+    {
+        try {
+            for (Bank bank : accounts) {
+                boolean idMatch = bank.getAccountId() == accountId;
+                if (idMatch) {
+
+
+                    bankDao.closeAccount(bank);
+                    System.out.println("\nAccount " + accountId + " has been closed.");
+                    break;
+                }
+            }
+        }catch (LoginFail e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
 }

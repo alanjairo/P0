@@ -64,7 +64,7 @@ public class SQLiteBankDao implements BankDao{
     }
 
     @Override
-    public Bank updateMoney(Bank bank)
+    public void updateMoney(Bank bank)
     {
         String sql = "update account set balance = ? where account_id = ?";
         try(Connection connection = DatabaseConnector.createConnection()){
@@ -73,45 +73,32 @@ public class SQLiteBankDao implements BankDao{
             preparedStatement.setDouble(1, bank.getBalance());
             preparedStatement.setInt(2, bank.getAccountId());
 
-            int result = preparedStatement.executeUpdate();
-            if(result == 1)
-            {
-                return bank;
-            }
-            throw new UserSQLException("Account Could Not Be Updated, Please Try Again.");
+            //int result =
+            preparedStatement.executeUpdate();
+            //if(result == 1)
+            //{
+            //    return bank;
+            //}
+            //throw new UserSQLException("Account Could Not Be Updated, Please Try Again.");
         }catch (SQLException e)
         {
-            throw new UserSQLException(e.getMessage());
+            throw new UserSQLException("Account Could Not Be Updated, Please Try Again.");
         }
     }
 
-    /*public List<Bank> getSpecificAccounts(Bank bankCred)
+    @Override
+    public void closeAccount(Bank bank)
     {
-        String sql = "select * from account where account_user = (?)";
+        String sql = "delete from account where account_id = ?";
         try(Connection connection = DatabaseConnector.createConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1,bankCred.getAccountUser());
-            int result = preparedStatement.executeUpdate();
-
-            List<Bank> accounts = new ArrayList<>();
-            while(resultSet.next())
-            {
-                Bank accountRecord = new Bank();
-                accountRecord.setAccountId(resultSet.getInt("account_id"));
-                accountRecord.setBankName(resultSet.getString("bank_name"));
-                accountRecord.setAccountType(resultSet.getString("account_type"));
-                accountRecord.setBalance(resultSet.getDouble("balance"));
-                accountRecord.setAccountUser(resultSet.getInt("account_id"));
-                accountRecord.setJointUser(resultSet.getInt("joint_id"));
-
-                accounts.add(accountRecord);
-            }
-
-            return accounts;
-        }catch(SQLException e)
+            preparedStatement.setInt(1, bank.getAccountId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e)
         {
-            throw new UserSQLException(e.getMessage());
+            throw new UserSQLException("Account Could Not Be Deleted, Please Try Again.");
         }
-    }*/
+    }
+
 }
