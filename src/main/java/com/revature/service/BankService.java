@@ -3,10 +3,8 @@ package com.revature.service;
 import com.revature.entity.Bank;
 import com.revature.entity.User;
 import com.revature.exception.LoginFail;
-import com.revature.exception.RegisterFail;
 import com.revature.repo.BankDao;
 
-import javax.lang.model.type.NullType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,16 +44,15 @@ public class BankService {
 
     public void depositCheck (List<Bank> accounts, int accountId, double deposit)
     {
-        double result = 0.0;
         try {
             for (Bank bank : accounts) {
                 boolean idMatch = bank.getAccountId() == accountId;
                 if (idMatch) {
-                    result = bank.getBalance() + deposit;
+                    double result = bank.getBalance() + deposit;
                     bank.setBalance(result);
 
                     bankDao.updateMoney(bank);
-                    System.out.println("\nAccount: " + bank.getAccountId() + "\nBalance: " + bank.getBalance());
+                    System.out.println("\nAccount: " + bank.getAccountId() + "\nBalance: " + bank.getBalance()+"\n");
                     break;
                 }
             }
@@ -66,12 +63,11 @@ public class BankService {
     }
     public void withdrawCheck (List<Bank> accounts, int accountId, double withdraw)
     {
-        double result = 0.0;
         try {
             for (Bank bank : accounts) {
                 boolean idMatch = bank.getAccountId() == accountId;
                 if (idMatch && withdraw <= bank.getBalance()) {
-                    result = bank.getBalance() - withdraw;
+                    double result = bank.getBalance() - withdraw;
                     bank.setBalance(result);
 
                     bankDao.updateMoney(bank);
@@ -97,7 +93,7 @@ public class BankService {
 
 
                     bankDao.closeAccount(bank);
-                    System.out.println("\nAccount " + accountId + " has been closed.");
+                    System.out.println("\nAccount " + accountId + " has been closed.\n");
                     break;
                 }
             }

@@ -1,7 +1,6 @@
 package com.revature.controller;
 
 import com.revature.exception.LoginFail;
-import com.revature.exception.RegisterFail;
 import com.revature.service.UserService;
 import com.revature.entity.User;
 
@@ -57,7 +56,7 @@ public class UserController {
         }
         else
         {
-            System.out.printf("New account created: %s", newUser);
+            System.out.printf("New account created: %s", newUser + "\n");
             return newUser;
         }
     }

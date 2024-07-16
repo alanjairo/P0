@@ -29,7 +29,7 @@ public class Main {
 
             BankDao bankDao = new SQLiteBankDao();
             BankService bServe = new BankService(bankDao);
-            BankController bControl = new BankController(scan, bServe, userControl);
+            BankController bControl = new BankController(scan, bServe);
 
             Map<String, String> userMap = new HashMap<>();
             userMap.put("Continue Loop", "True");
@@ -37,17 +37,13 @@ public class Main {
             do
             {
                 User user = userControl.promptUserService(userMap);
-                if(userMap.containsKey("User"))
-                {
+                //if(userMap.containsKey("User"))
+                //{
                     //BankActivity();
-                    do{
-
-                    bControl.promptBankService(userMap, user);
-
-                    }while(Boolean.parseBoolean(userMap.get("Continue Loop")));
-                    //System.out.printf("bank stuff for %s happens", userMap.get("User"));
-                    //scan.nextLine();
-                }
+                    while(userMap.containsKey("User")){
+                        bControl.promptBankService(userMap, user);
+                    }
+                //}
             }while(Boolean.parseBoolean(userMap.get("Continue Loop")));
         }
     }

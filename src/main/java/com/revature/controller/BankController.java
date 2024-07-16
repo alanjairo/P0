@@ -4,43 +4,39 @@ import com.revature.entity.Bank;
 import com.revature.entity.User;
 import com.revature.exception.LoginFail;
 import com.revature.exception.RegisterFail;
-import com.revature.repo.BankDao;
 import com.revature.service.BankService;
-import com.revature.service.UserService;
 
-import java.nio.file.Path;
 import java.util.*;
 
 public class BankController {
     private Scanner scan;
     private BankService bServe;
-    private UserController userController;
 
-    public BankController(Scanner scan, BankService bServe, UserController userController)
+    public BankController(Scanner scan, BankService bServe)
     {
         this.scan = scan;
         this.bServe = bServe;
-        this.userController = userController;
     }
 
     public void promptBankService(Map<String,String> userMap, User user)
     {
-        System.out.println("Would you like to: ");
-        System.out.println("1. Create a New Checking Account\n2. Check Bank Details\n" +
-                "3. Deposit Money\n4. Withdraw Money\n5. Close a Checking Account\n" +
-                "q. To Log Out...");
         try{
+            System.out.println("Would you like to: \n" +
+                "1. Create a New Account\n" +
+                "2. Check Bank Account Details\n" +
+                "3. Deposit Money\n" +
+                "4. Withdraw Money\n" +
+                "5. Close an Account\n" +
+                "q. To Log Out...");
             String bankAction = scan.nextLine();
-            Bank bankInfo = new Bank();
-            List<Bank> accounts = new ArrayList<>();
             switch (bankAction) {
                 case "1":
                     //create new account
-                    bankInfo = registerNewAccount(user);
+                    registerNewAccount(user);
                     break;
                 case "2":
                     //check details
-                    accounts = bankAccount(user);
+                    bankAccount(user);
                     break;
                 case "3":
                     //deposit money
@@ -56,7 +52,8 @@ public class BankController {
                     break;
                 case "q":
                     System.out.println("Logging Out!");
-                    userMap.put("Continue Loop", "False");
+                    userMap.remove("User");
+                    //userMap.put("Continue Loop", "False");
             }
         }catch (LoginFail e)
         {
@@ -64,18 +61,16 @@ public class BankController {
         }
     }
 
-    public Bank registerNewAccount(User user){
+    public void registerNewAccount(User user){
         Bank newCred = createNewAccount(user);
         Bank newAccount = bServe.validateBankCred(newCred);
         if(newAccount == null)
         {
             System.out.println("Username already exists, Please try another username.");
-            return null;
         }
         else
         {
             System.out.printf("New account created: %s", newAccount.getAccountUser() + "\n");
-            return newAccount;
         }
 
     }
@@ -125,22 +120,19 @@ public class BankController {
         if (checkAccount(accounts))
             return accounts;
         return null;
-        //bServe.specificAccounts(bank);
-        //return bServe.checkBankInfo();
     }
 
     public void deposit(List<Bank> accounts)
     {
         int accountId;
-        double deposit = 0.0;
         if (checkAccount(accounts))
         {
             System.out.println("Which account would you like to deposit in to: ");
-            accountId = scan.nextInt();
+            accountId = Integer.parseInt(scan.nextLine());
             if (searchAccount(accounts, accountId))
             {
                 System.out.println("How much would you like to deposit: ");
-                deposit = scan.nextDouble();
+                double deposit = Double.parseDouble(scan.nextLine());
                 bServe.depositCheck(accounts, accountId, deposit);
             }
         }
@@ -149,15 +141,14 @@ public class BankController {
     public void withdraw(List<Bank> accounts)
     {
         int accountId;
-        double withdraw = 0.0;
         if (checkAccount(accounts))
         {
             System.out.println("Which account would you like to withdraw in to: ");
-            accountId = scan.nextInt();
+            accountId = Integer.parseInt(scan.nextLine());
             if (searchAccount(accounts, accountId))
             {
                 System.out.println("How much would you like to withdraw: ");
-                withdraw = scan.nextDouble();
+                double withdraw = Double.parseDouble(scan.nextLine());
                 bServe.withdrawCheck(accounts, accountId, withdraw);
             }
         }
@@ -189,7 +180,7 @@ public class BankController {
     {
         int accountId;
         System.out.print("Which account would you like to close: ");
-        accountId = scan.nextInt();
+        accountId = Integer.parseInt(scan.nextLine());
 
         if(searchAccount(accounts,accountId))
         {

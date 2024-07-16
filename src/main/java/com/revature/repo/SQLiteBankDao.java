@@ -1,7 +1,6 @@
 package com.revature.repo;
 
 import com.revature.entity.Bank;
-import com.revature.entity.User;
 import com.revature.exception.UserSQLException;
 import com.revature.utility.DatabaseConnector;
 
@@ -73,13 +72,7 @@ public class SQLiteBankDao implements BankDao{
             preparedStatement.setDouble(1, bank.getBalance());
             preparedStatement.setInt(2, bank.getAccountId());
 
-            //int result =
             preparedStatement.executeUpdate();
-            //if(result == 1)
-            //{
-            //    return bank;
-            //}
-            //throw new UserSQLException("Account Could Not Be Updated, Please Try Again.");
         }catch (SQLException e)
         {
             throw new UserSQLException("Account Could Not Be Updated, Please Try Again.");
