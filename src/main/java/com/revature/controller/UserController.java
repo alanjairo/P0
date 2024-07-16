@@ -56,7 +56,7 @@ public class UserController {
         }
         else
         {
-            System.out.printf("New account created: %s", newUser + "\n");
+            System.out.printf("New account created for %s", newUser.getUsername() + "\n");
             return newUser;
         }
     }

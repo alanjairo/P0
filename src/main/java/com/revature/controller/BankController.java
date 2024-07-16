@@ -108,7 +108,7 @@ public class BankController {
             joint_id = account_id;// if not joint defaults to single user's ID avoiding null
         }
         else {
-            throw new RegisterFail("L");
+            throw new RegisterFail("Please enter y or n.");
         }
         //System.out.println("Username: " + newUsername + "\nPassword: " + newPassword);
         return new Bank(accountId,bankName,accountType,balance,account_id,joint_id);
@@ -120,6 +120,8 @@ public class BankController {
         if (checkAccount(accounts))
             return accounts;
         return null;
+        //throw new RegisterFail("There is no account with this user.\n" +
+                //"Please create an account before continuing.");
     }
 
     public void deposit(List<Bank> accounts)
@@ -143,7 +145,7 @@ public class BankController {
         int accountId;
         if (checkAccount(accounts))
         {
-            System.out.println("Which account would you like to withdraw in to: ");
+            System.out.println("Which account would you like to withdraw from: ");
             accountId = Integer.parseInt(scan.nextLine());
             if (searchAccount(accounts, accountId))
             {

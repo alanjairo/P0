@@ -41,11 +41,12 @@ public class UserService {
             boolean pMatch = user.getPassword().equals(cred.getPassword());
             if(uMatch && pMatch)
             {
+                System.out.println("Welcome " + user.getUsername() + "\n");
                 cred.setUserId(user.getUserId()); // changes user id from random to the databases user id
                 return cred;
             }
         }
-        throw new LoginFail("Credentials Invalid, Please Try Again.");
+        throw new LoginFail("Credentials too long.\nEnter credentials under 30 characters.");
         //return cred;
     }
 
