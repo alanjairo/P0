@@ -63,6 +63,28 @@ public class SQLiteBankDao implements BankDao{
         }
     }
 
+    @Override
+    public Bank updateMoney(Bank bank)
+    {
+        String sql = "update account set balance = ? where account_id = ?";
+        try(Connection connection = DatabaseConnector.createConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setDouble(1, bank.getBalance());
+            preparedStatement.setInt(2, bank.getAccountId());
+
+            int result = preparedStatement.executeUpdate();
+            if(result == 1)
+            {
+                return bank;
+            }
+            throw new UserSQLException("Account Could Not Be Updated, Please Try Again.");
+        }catch (SQLException e)
+        {
+            throw new UserSQLException(e.getMessage());
+        }
+    }
+
     /*public List<Bank> getSpecificAccounts(Bank bankCred)
     {
         String sql = "select * from account where account_user = (?)";

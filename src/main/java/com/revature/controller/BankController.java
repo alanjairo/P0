@@ -9,9 +9,7 @@ import com.revature.service.BankService;
 import com.revature.service.UserService;
 
 import java.nio.file.Path;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class BankController {
     private Scanner scan;
@@ -34,6 +32,7 @@ public class BankController {
         try{
             String bankAction = scan.nextLine();
             Bank bankInfo = new Bank();
+            List<Bank> accounts = new ArrayList<>();
             switch (bankAction) {
                 case "1":
                     //create new account
@@ -41,13 +40,15 @@ public class BankController {
                     break;
                 case "2":
                     //check details
-                    bankAccount(user);
+                    accounts = bankAccount(user);
                     break;
                 case "3":
                     //deposit money
+                    deposit(bankAccount(user));
                     break;
                 case "4":
                     //withdraw money
+                    withdraw(bankAccount(user));
                     break;
                 case "5":
                     //close an account
@@ -117,11 +118,74 @@ public class BankController {
         return new Bank(accountId,bankName,accountType,balance,account_id,joint_id);
     }
 
-    public void bankAccount(User user)
+    public List<Bank> bankAccount(User user)
     {
-        bServe.specificAccounts(user);
+        List<Bank> accounts = bServe.specificAccounts(user);
+        if (checkAccount(accounts))
+            return accounts;
+        return null;
         //bServe.specificAccounts(bank);
         //return bServe.checkBankInfo();
     }
 
+    public void deposit(List<Bank> accounts)
+    {
+        int accountId;
+        double deposit = 0.0;
+        if (checkAccount(accounts))
+        {
+            System.out.println("Which account would you like to deposit in to: ");
+            accountId = scan.nextInt();
+            if (searchAccount(accounts, accountId))
+            {
+                System.out.println("How much would you like to deposit: ");
+                deposit = scan.nextDouble();
+                bServe.depositCheck(accounts, accountId, deposit);
+            }
+        }
+    }
+
+    public void withdraw(List<Bank> accounts)
+    {
+        int accountId;
+        double withdraw = 0.0;
+        if (checkAccount(accounts))
+        {
+            System.out.println("Which account would you like to withdraw in to: ");
+            accountId = scan.nextInt();
+            if (searchAccount(accounts, accountId))
+            {
+                System.out.println("How much would you like to withdraw: ");
+                withdraw = scan.nextDouble();
+                bServe.withdrawCheck(accounts, accountId, withdraw);
+            }
+        }
+    }
+
+    public boolean checkAccount(List<Bank> accounts)
+    {
+        if (accounts.isEmpty()) {
+            System.out.println("There is no account with this user.\n" +
+                    "Please create an account before continuing.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean searchAccount(List<Bank> accounts, int accountId)
+    {
+        for(Bank bank: accounts)
+        {
+            if(bank.getAccountId() == accountId)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //public void closeAccount(List<Bank> accounts, int accountId)
+    //{
+
+    //}
 }
