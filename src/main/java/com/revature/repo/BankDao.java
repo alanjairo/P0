@@ -7,4 +7,5 @@ import java.util.List;
 public interface BankDao {
     Bank createNewAccount(Bank  newAccountCred);
     List<Bank> getAllAccounts();
+    //List<Bank> getSpecificAccounts(Bank bankCred);
 }

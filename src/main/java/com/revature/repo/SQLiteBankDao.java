@@ -51,8 +51,8 @@ public class SQLiteBankDao implements BankDao{
                 accountRecord.setBankName(resultSet.getString("bank_name"));
                 accountRecord.setAccountType(resultSet.getString("account_type"));
                 accountRecord.setBalance(resultSet.getDouble("balance"));
-                accountRecord.setAccountUser(resultSet.getInt("account_id"));
-                accountRecord.setJointUser(resultSet.getInt("joint_id"));
+                accountRecord.setAccountUser(resultSet.getInt("account_user"));
+                accountRecord.setJointUser(resultSet.getInt("joint_user"));
 
                 accounts.add(accountRecord);
             }
@@ -63,5 +63,33 @@ public class SQLiteBankDao implements BankDao{
         }
     }
 
+    /*public List<Bank> getSpecificAccounts(Bank bankCred)
+    {
+        String sql = "select * from account where account_user = (?)";
+        try(Connection connection = DatabaseConnector.createConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
+            preparedStatement.setInt(1,bankCred.getAccountUser());
+            int result = preparedStatement.executeUpdate();
+
+            List<Bank> accounts = new ArrayList<>();
+            while(resultSet.next())
+            {
+                Bank accountRecord = new Bank();
+                accountRecord.setAccountId(resultSet.getInt("account_id"));
+                accountRecord.setBankName(resultSet.getString("bank_name"));
+                accountRecord.setAccountType(resultSet.getString("account_type"));
+                accountRecord.setBalance(resultSet.getDouble("balance"));
+                accountRecord.setAccountUser(resultSet.getInt("account_id"));
+                accountRecord.setJointUser(resultSet.getInt("joint_id"));
+
+                accounts.add(accountRecord);
+            }
+
+            return accounts;
+        }catch(SQLException e)
+        {
+            throw new UserSQLException(e.getMessage());
+        }
+    }*/
 }

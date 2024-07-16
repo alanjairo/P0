@@ -4,17 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d36b8e34-002b-48e3-af92-17bb4fe030ca" name="Changes" comment="adding SQLiteBankDao">
+    <list default="true" id="d36b8e34-002b-48e3-af92-17bb4fe030ca" name="Changes" comment="added creating new bank accounts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/controller/BankController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/controller/BankController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/repo/BankDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/repo/BankDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/repo/SQLiteBankDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/repo/SQLiteBankDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/repo/SQLiteUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/repo/SQLiteUserDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/service/BankService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/service/BankService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bank.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bank.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bank_setup_reset_script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bank_setup_reset_script.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +58,7 @@
   "keyToString": {
     "Application.DatabaseConnector.executor": "Run",
     "Application.DatabaseScriptRunner.executor": "Run",
-    "Application.Main.executor": "Debug",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
@@ -68,7 +66,7 @@
     "last_opened_file_path": "C:/Users/Proto"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.DatabaseScriptRunner">
     <configuration name="DatabaseConnector" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.revature.utility.DatabaseConnector" />
       <module name="bank" />
@@ -110,8 +108,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.DatabaseScriptRunner" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.DatabaseConnector" />
       </list>
     </recent_temporary>
@@ -141,13 +139,22 @@
       <option name="project" value="LOCAL" />
       <updated>1721090292415</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added creating new bank accounts">
+      <option name="closed" value="true" />
+      <created>1721101096219</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1721101096219</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding code to bank files and editing user id into User files" />
     <MESSAGE value="adding SQLiteBankDao" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding SQLiteBankDao" />
+    <MESSAGE value="added creating new bank accounts" />
+    <option name="LAST_COMMIT_MESSAGE" value="added creating new bank accounts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -155,6 +162,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.RuntimeException" package="java.lang" />
           <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="com.revature.exception.UserSQLException" package="com.revature.exception" />
+          <option name="timeStamp" value="16" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/revature/Main.java</url>
@@ -172,24 +183,34 @@
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/revature/controller/UserController.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/revature/controller/UserController.java</url>
-          <line>75</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/revature/controller/UserController.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/revature/service/UserService.java</url>
           <line>37</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/revature/controller/UserController.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/revature/repo/SQLiteBankDao.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/revature/service/BankService.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/revature/controller/BankController.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/revature/controller/BankController.java</url>
+          <line>121</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

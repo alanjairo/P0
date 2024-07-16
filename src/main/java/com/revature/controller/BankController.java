@@ -41,7 +41,7 @@ public class BankController {
                     break;
                 case "2":
                     //check details
-                    bankInfo = bankAccount();
+                    bankAccount(user);
                     break;
                 case "3":
                     //deposit money
@@ -117,10 +117,10 @@ public class BankController {
         return new Bank(accountId,bankName,accountType,balance,account_id,joint_id);
     }
 
-    public Bank bankAccount()
+    public void bankAccount(User user)
     {
-
-        return null;
+        bServe.specificAccounts(user);
+        //bServe.specificAccounts(bank);
         //return bServe.checkBankInfo();
     }
 

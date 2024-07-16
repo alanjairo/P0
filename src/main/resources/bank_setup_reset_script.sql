@@ -19,7 +19,7 @@ create table "account"(
     joint_user integer default null references user(user_id)
 );
 	
-insert into "account" values(0, "chase", "checkings", 1323.47, 0, null);
+insert into "account" values(0, "chase", "checkings", 1323.47, 0, 0);
 
 insert into "account" values(1, "chase", "checkings", 2543.97, 1, 0);
 

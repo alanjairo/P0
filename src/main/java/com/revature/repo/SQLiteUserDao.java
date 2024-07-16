@@ -12,12 +12,13 @@ public class SQLiteUserDao implements UserDao{
 
     @Override
     public User createUser(User newUserCred) {
-        String sql = "insert into user values (?, ?)";
+        String sql = "insert into user values (?, ?, ?)";
         try(Connection connection = DatabaseConnector.createConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, newUserCred.getUsername());
-            preparedStatement.setString(2, newUserCred.getPassword());
+            preparedStatement.setInt(1, newUserCred.getUserId());
+            preparedStatement.setString(2, newUserCred.getUsername());
+            preparedStatement.setString(3, newUserCred.getPassword());
 
             int result = preparedStatement.executeUpdate();
             if(result == 1)
