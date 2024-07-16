@@ -19,37 +19,47 @@ public class UserController {
         this.userService = userService;
     }
 
-    public void promptUserService(Map<String,String> userMap)
+    public User promptUserService(Map<String,String> userMap)
     {
         System.out.println("Would you like to: ");
         System.out.println("1. Register Account\n2. Login\nq. To Quit...");
         try{
+            User user = new User();
             String userAction = scan.nextLine();
             switch (userAction) {
                 case "1":
-                    registerNewUser();
+                    user = registerNewUser();
                     break;
                 case "2":
-                    userMap.put("User", login().toString());
+                    user = login();
+                    userMap.put("User", user.toString());
                     break;
                 case "q":
                     System.out.println("Goodbye!");
                     userMap.put("Continue Loop", "False");
             }
+            return user;
         }catch (LoginFail e)
         {
             System.out.println(e.getMessage());
         }
+        return null;
     }
 
-    public void registerNewUser()
+    public User registerNewUser()
     {
         User newCreds = getUserCred();
         User newUser = userService.validateUserCred(newCreds);
         if(newUser == null)
+        {
             System.out.println("Username already exists, Please try another username.");
+            return null;
+        }
         else
+        {
             System.out.printf("New account created: %s", newUser);
+            return newUser;
+        }
     }
 
     public User login()

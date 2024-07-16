@@ -45,6 +45,7 @@ public class SQLiteUserDao implements UserDao{
             while(resultSet.next())
             {
                 User userRecord = new User();
+                userRecord.setUserId(resultSet.getInt("user_id"));
                 userRecord.setUsername(resultSet.getString("username"));
                 userRecord.setPassword(resultSet.getString("password"));
                 users.add(userRecord);

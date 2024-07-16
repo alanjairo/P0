@@ -41,6 +41,7 @@ public class UserService {
             boolean pMatch = user.getPassword().equals(cred.getPassword());
             if(uMatch && pMatch)
             {
+                cred.setUserId(user.getUserId()); // changes user id from random to the databases user id
                 return cred;
             }
         }

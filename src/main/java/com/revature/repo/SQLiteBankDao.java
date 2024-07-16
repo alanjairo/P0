@@ -12,7 +12,7 @@ import java.util.List;
 public class SQLiteBankDao implements BankDao{
     public Bank createNewAccount (Bank newAccountCred)
     {
-        String sql = "insert into bank values (?, ?, ?, ?, ?, ?)";
+        String sql = "insert into account values (?, ?, ?, ?, ?, ?)";
         try(Connection connection = DatabaseConnector.createConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -37,7 +37,7 @@ public class SQLiteBankDao implements BankDao{
 
     @Override
     public List<Bank> getAllAccounts() {
-        String sql = "select * from user";
+        String sql = "select * from account";
         try(Connection connection = DatabaseConnector.createConnection())
         {
             Statement statement = connection.createStatement();
@@ -62,4 +62,6 @@ public class SQLiteBankDao implements BankDao{
             throw new UserSQLException(e.getMessage());
         }
     }
+
+
 }

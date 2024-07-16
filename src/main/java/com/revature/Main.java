@@ -2,6 +2,7 @@ package com.revature;
 
 import com.revature.controller.BankController;
 import com.revature.controller.UserController;
+import com.revature.entity.User;
 import com.revature.repo.BankDao;
 import com.revature.repo.SQLiteBankDao;
 import com.revature.repo.SQLiteUserDao;
@@ -28,22 +29,26 @@ public class Main {
 
             BankDao bankDao = new SQLiteBankDao();
             BankService bServe = new BankService(bankDao);
-            BankController bControl = new BankController(scan, bServe);
+            BankController bControl = new BankController(scan, bServe, userControl);
 
             Map<String, String> userMap = new HashMap<>();
             userMap.put("Continue Loop", "True");
 
-            while(Boolean.parseBoolean(userMap.get("Continue Loop")))
+            do
             {
-                userControl.promptUserService(userMap);
+                User user = userControl.promptUserService(userMap);
                 if(userMap.containsKey("User"))
                 {
                     //BankActivity();
-                    bControl.promptBankService(userMap);
+                    do{
+
+                    bControl.promptBankService(userMap, user);
+
+                    }while(Boolean.parseBoolean(userMap.get("Continue Loop")));
                     //System.out.printf("bank stuff for %s happens", userMap.get("User"));
                     //scan.nextLine();
                 }
-            }
+            }while(Boolean.parseBoolean(userMap.get("Continue Loop")));
         }
     }
 }

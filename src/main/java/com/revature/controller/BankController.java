@@ -6,7 +6,9 @@ import com.revature.exception.LoginFail;
 import com.revature.exception.RegisterFail;
 import com.revature.repo.BankDao;
 import com.revature.service.BankService;
+import com.revature.service.UserService;
 
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
@@ -14,14 +16,16 @@ import java.util.Scanner;
 public class BankController {
     private Scanner scan;
     private BankService bServe;
+    private UserController userController;
 
-    public BankController(Scanner scan, BankService bServe)
+    public BankController(Scanner scan, BankService bServe, UserController userController)
     {
         this.scan = scan;
         this.bServe = bServe;
+        this.userController = userController;
     }
 
-    public void promptBankService(Map<String,String> userMap)
+    public void promptBankService(Map<String,String> userMap, User user)
     {
         System.out.println("Would you like to: ");
         System.out.println("1. Create a New Checking Account\n2. Check Bank Details\n" +
@@ -29,13 +33,15 @@ public class BankController {
                 "q. To Log Out...");
         try{
             String bankAction = scan.nextLine();
+            Bank bankInfo = new Bank();
             switch (bankAction) {
                 case "1":
                     //create new account
-                    createNewAccount(userMap);
+                    bankInfo = registerNewAccount(user);
                     break;
                 case "2":
                     //check details
+                    bankInfo = bankAccount();
                     break;
                 case "3":
                     //deposit money
@@ -56,25 +62,35 @@ public class BankController {
         }
     }
 
-    public Bank createNewAccount(Map<String,String> userMap)
+    public Bank registerNewAccount(User user){
+        Bank newCred = createNewAccount(user);
+        Bank newAccount = bServe.validateBankCred(newCred);
+        if(newAccount == null)
+        {
+            System.out.println("Username already exists, Please try another username.");
+            return null;
+        }
+        else
+        {
+            System.out.printf("New account created: %s", newAccount.getAccountUser() + "\n");
+            return newAccount;
+        }
+
+    }
+
+    public Bank createNewAccount(User user)
     {
         //userMap should be the username of user
         //it should connect to username id
         // make the account id for the account the user id
 
-        User user = new User();
         Random r = new Random();
         int accountId = r.nextInt(10000);
         String bankName;
         String accountType;
         double balance;
-        int account_id;
+        int account_id = user.getUserId();
         int joint_id;
-
-        if(user.getUsername().equals(userMap.get("User")))
-            account_id = user.getUserId();
-        else
-            throw new RegisterFail("Username does not match any ID.");
 
         System.out.print("Which bank are you opening an account with: ");
         bankName = scan.nextLine();
@@ -84,17 +100,28 @@ public class BankController {
         balance = Double.parseDouble(scan.nextLine());
         System.out.println("Will this account be a joint account(y/n): ");
 
-        if(scan.nextLine().equals("y")||scan.nextLine().equals("Y"))
+        String yORn = scan.nextLine();
+
+        if(yORn.equals("y") || yORn.equals("Y"))
         {
             System.out.println("Enter joint owner's ID: ");
             joint_id = scan.nextInt();
         }
-        else if(scan.nextLine().equals("n")||scan.nextLine().equals("N"))
-            joint_id = user.getUserId();// if not joint defaults to single user's ID avoiding null
-        else
+        else if(yORn.equals("n") || yORn.equals("N")) {
+            joint_id = account_id;// if not joint defaults to single user's ID avoiding null
+        }
+        else {
             throw new RegisterFail("L");
+        }
         //System.out.println("Username: " + newUsername + "\nPassword: " + newPassword);
         return new Bank(accountId,bankName,accountType,balance,account_id,joint_id);
+    }
+
+    public Bank bankAccount()
+    {
+
+        return null;
+        //return bServe.checkBankInfo();
     }
 
 }

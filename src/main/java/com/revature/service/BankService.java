@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import com.revature.entity.Bank;
 import com.revature.repo.BankDao;
 
 public class BankService {
@@ -9,5 +10,9 @@ public class BankService {
         this.bankDao = bankDao;
     }
 
+    public Bank validateBankCred(Bank newBankCred)
+    {
+        return bankDao.createNewAccount(newBankCred);
+    }
 
 }
