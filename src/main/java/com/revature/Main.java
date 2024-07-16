@@ -1,8 +1,12 @@
 package com.revature;
 
+import com.revature.controller.BankController;
 import com.revature.controller.UserController;
+import com.revature.repo.BankDao;
+import com.revature.repo.SQLiteBankDao;
 import com.revature.repo.SQLiteUserDao;
 import com.revature.repo.UserDao;
+import com.revature.service.BankService;
 import com.revature.service.UserService;
 
 import java.util.HashMap;
@@ -22,6 +26,10 @@ public class Main {
             UserService userService = new UserService(userDao);
             UserController userControl = new UserController(scan, userService);
 
+            BankDao bankDao = new SQLiteBankDao();
+            BankService bServe = new BankService(bankDao);
+            BankController bControl = new BankController(scan, bServe);
+
             Map<String, String> userMap = new HashMap<>();
             userMap.put("Continue Loop", "True");
 
@@ -31,8 +39,9 @@ public class Main {
                 if(userMap.containsKey("User"))
                 {
                     //BankActivity();
-                    System.out.printf("bank stuff for %s happens", userMap.get("User"));
-                    scan.nextLine();
+                    bControl.promptBankService(userMap);
+                    //System.out.printf("bank stuff for %s happens", userMap.get("User"));
+                    //scan.nextLine();
                 }
             }
         }

@@ -6,6 +6,7 @@ import com.revature.service.UserService;
 import com.revature.entity.User;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 public class UserController {
@@ -41,41 +42,6 @@ public class UserController {
         }
     }
 
-    public void promptBankService(Map<String,String> userMap)
-    {
-        System.out.println("Would you like to: ");
-        System.out.println("1. Create a New Checking Account\n2. Check Bank Details\n" +
-                "3. Deposit Money\n4. Withdraw Money\n5. Close a Checking Account\n" +
-                "q. To Log Out...");
-        try{
-            String bankAction = scan.nextLine();
-            switch (bankAction) {
-                case "1":
-                    //create new account
-                    break;
-                case "2":
-                    //check details
-                    break;
-                case "3":
-                    //deposit money
-                    break;
-                case "4":
-                    //withdraw money
-                    break;
-                case "5":
-                    //close an account
-                    break;
-                case "q":
-                    System.out.println("Logging Out!");
-                    userMap.put("Continue Loop", "False");
-            }
-        }catch (LoginFail e)
-        {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
     public void registerNewUser()
     {
         User newCreds = getUserCred();
@@ -94,15 +60,18 @@ public class UserController {
 
     public User getUserCred()
     {
+        int userId;
         String newUsername;
         String newPassword;
+        Random r = new Random();
 
+        userId = r.nextInt(10000);
         System.out.print("Please enter a username: ");
         newUsername = scan.nextLine();
         System.out.print("Please enter a password: ");
         newPassword = scan.nextLine();
         //System.out.println("Username: " + newUsername + "\nPassword: " + newPassword);
-        return new User(newUsername,newPassword);
+        return new User(userId, newUsername,newPassword);
     }
 
 }

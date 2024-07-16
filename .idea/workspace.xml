@@ -5,30 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d36b8e34-002b-48e3-af92-17bb4fe030ca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/controller/BankController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/entity/Bank.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/exception/LoginFail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/exception/LogoutFail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/exception/RegisterFail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/exception/UserSQLException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/repo/BankDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/repo/InMemoryUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/repo/SQLiteUserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/repo/UserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/service/BankService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/utility/DatabaseConnector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/utility/DatabaseScriptRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/bank.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/bank_setup_reset_script.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/controller/BankController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/controller/BankController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/entity/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/entity/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/repo/BankDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/repo/BankDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/repo/InMemoryUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/repo/InMemoryUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/service/BankService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/service/BankService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bank.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bank.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bank_setup_reset_script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bank_setup_reset_script.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +49,7 @@
   "keyToString": {
     "Application.DatabaseConnector.executor": "Run",
     "Application.DatabaseScriptRunner.executor": "Run",
-    "Application.Main.executor": "Run",
+    "Application.Main.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
@@ -73,6 +60,19 @@
   <component name="RunManager" selected="Application.Main">
     <configuration name="DatabaseConnector" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.revature.utility.DatabaseConnector" />
+      <module name="bank" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.revature.utility.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DatabaseScriptRunner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.revature.utility.DatabaseScriptRunner" />
       <module name="bank" />
       <extension name="coverage">
         <pattern>
@@ -100,6 +100,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.DatabaseScriptRunner" />
         <item itemvalue="Application.DatabaseConnector" />
       </list>
     </recent_temporary>
@@ -122,6 +123,16 @@
           <properties class="java.lang.RuntimeException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/revature/Main.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/revature/Main.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
